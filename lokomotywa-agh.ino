@@ -1,14 +1,15 @@
+// 6 - RESET pin
 const int in1=13;
 const int in2=12;
-const int in3=11;
-const int in4=10;
-const int speedPinA=6;
-const int speedPinB=5;
+const int in3=14;
+const int in4=27;
+const int speedPinA=25;
+const int speedPinB=26;
 
 void setup()
 {
   Serial.begin(9600);
-  Serial.print("Lokomotywa AGH - Setup");
+  Serial.print("Lokomotywa AGH - Setup\n");
 
   pinMode(in1,OUTPUT);
   pinMode(in2,OUTPUT);
@@ -23,9 +24,11 @@ void setup()
 
 void loop()
 {
+  Serial.print("Begin frame\n");
   _mRight(in1,in2);
   _mRight(in3,in4);
-  int n=analogRead(A0)/4;
+
+  int n=1;
   _mSetSpeed(speedPinA,n);
   _mSetSpeed(speedPinB,n);
 }
