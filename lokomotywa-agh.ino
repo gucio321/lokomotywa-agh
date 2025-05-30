@@ -51,7 +51,7 @@ void _mStop(int pin1,int pin2)
   digitalWrite(pin2,HIGH);
 }
 
-void _mSetSpeed(int pinPWM,int SpeedValue)
+void _mSetSpeed(int pinPWM,float SpeedValue)
 {
   analogWrite(pinPWM,SpeedValue);
 }
