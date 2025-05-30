@@ -1,11 +1,12 @@
-// 6 - RESET pin
-const int in1=13;
-const int in2=12;
-const int in3=14;
-const int in4=27;
-const int speedPinA=25;
-const int speedPinB=26;
+// Inicjalizacja wyjść GPIO
+const int in1=13; //D13
+const int in2=12; //D12
+const int in3=14; //D14
+const int in4=27; //D27 niespodzianka, są w tej samej lini
+const int speedPinA=26; //DS26
+const int speedPinB=25; //DS27
 
+// Przygotowanie do pracy
 void setup()
 {
   Serial.begin(9600);
@@ -22,6 +23,7 @@ void setup()
   digitalWrite(in4,HIGH);
 }
 
+// Pętla główna
 void loop()
 {
   Serial.print("Begin frame\n");
@@ -33,25 +35,29 @@ void loop()
   _mSetSpeed(speedPinB,n);
 }
 
+// Obraca silniczek w prawo poprzez mnienienie npięcia na 1. wejściu na HIGH i w 2. na LOW
 void _mRight(int pin1,int pin2)
 {
   digitalWrite(pin1,HIGH);
   digitalWrite(pin2,LOW);
 }
 
+// Obraca silniczek w lewo poprzez zmienienie napięcia na 1. wejściu na LOW i w 2. na HIGH
 void _mLeft(int pin1,int pin2)
 {
   digitalWrite(pin1,LOW);
   digitalWrite(pin2,HIGH);
 }
 
+// Zatrzymuje obrót silniczka poprzez ustawienie obu jego wejść na HIGH
 void _mStop(int pin1,int pin2)
 {
   digitalWrite(pin1,HIGH);
   digitalWrite(pin2,HIGH);
 }
 
-void _mSetSpeed(int pinPWM,float SpeedValue)
+// Zakres prędkości [0,255]
+void _mSetSpeed(int pinPWM,int SpeedValue)
 {
   analogWrite(pinPWM,SpeedValue);
 }
