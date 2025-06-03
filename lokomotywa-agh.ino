@@ -26,7 +26,9 @@ void setup()
 // Pętla główna
 void loop()
 {
-  Serial.print("Begin frame\n");
+  if (Serial.available()){
+    Serial.print("Begin frame\n");
+  }
   _mRight(in1,in2);
   _mRight(in3,in4);
 
