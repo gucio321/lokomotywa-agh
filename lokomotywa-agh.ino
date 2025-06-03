@@ -37,7 +37,7 @@ void loop()
   _mSetSpeed(speedPinB,n);
 }
 
-// Obraca silniczek w prawo poprzez zmienienie npięcia na 1. wejściu na HIGH i w 2. na LOW
+// Obraca silniczek w prawo poprzez zmienienie napięcia na 1. wejściu na HIGH i w 2. na LOW
 void _mRight(int pin1,int pin2)
 {
   digitalWrite(pin1,HIGH);
