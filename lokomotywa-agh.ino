@@ -3,8 +3,8 @@ const int in1=13; //D13
 const int in2=12; //D12
 const int in3=14; //D14
 const int in4=27; //D27 niespodzianka, są w tej samej lini
-const int speedPinA=26; //DS26
-const int speedPinB=25; //DS27
+const int speedPinA=26; //D26
+const int speedPinB=25; //D25
 
 // Przygotowanie do pracy
 void setup()
