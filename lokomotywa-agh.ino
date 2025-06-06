@@ -26,13 +26,13 @@ void setup()
 // Pętla główna
 void loop()
 {
-  if (Serial.available()){
+  //if (Serial.available()){
     Serial.print("Begin frame\n");
-  }
+  //}
   _mRight(in1,in2);
   _mRight(in3,in4);
 
-  int n=1;
+  int n=127;
   _mSetSpeed(speedPinA,n);
   _mSetSpeed(speedPinB,n);
 }
