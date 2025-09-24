@@ -10,7 +10,6 @@
 #endif
 // Przygotowanie do pracy
 void setup() {
-  Serial.begin(9600);
   setup_serial();
 
   DebugPrint("Hello from Lokomotywa AGH script!\n");
