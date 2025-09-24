@@ -2,6 +2,16 @@
 
 TODO
 
+# Setup
+
+1. run `git clone https://github.com/espressif/esp-idf.git ~/esp/esp-idf`
+2. in the repo folder run `git checkout v5.1.6` (this is the version used in this project for arduino compatibility reasons)
+3. run `git submodule update --init --recursive`
+4. run `./install.sh`
+
+Then, whenever you want to use `idf.py` in your terminal, run `. ~/esp/esp-idf/export.sh` to set up the environment variables for the current terminal session.
+Run `idf.py build` in projects directory to build the project.
+
 # Reference
 
 - Arudino IDE Board: `ESP32-WROOM-DA Module`
