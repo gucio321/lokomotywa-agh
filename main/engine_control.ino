@@ -3,28 +3,56 @@
 
 #include "setup.ino"
 
-void setRotation(enum engine e, enum direction d) {
-  auto pins = enginesPins[e];
-  switch(d) {
-    case Stop:
-      digitalWrite(pins[0], HIGH);
-      digitalWrite(pins[1], HIGH);
-      break;
-    case Left:
-      digitalWrite(pins[0], LOW);
-      digitalWrite(pins[1], HIGH);
-      break;
-    case Right:
-      digitalWrite(pins[0], HIGH);
-      digitalWrite(pins[1], LOW);
-      break;
-  }
-}
+class Engine {
+public:
+  Engine(int input1, int input2, int speedPin):
+  Engine(new int[3]{input1, input2, speedPin}) {}
 
-void setSpeed(enum engine e,int SpeedValue)
-{
-  auto pins = enginesPins[e];
-  analogWrite(pins[2],SpeedValue);
-}
+  Engine(int* p) {
+    pinout = new int[3];
+    pinout[0] = p[0];
+    pinout[1] = p[1];
+    pinout[2] = p[2];
+    setSpeed(0);
+  }
+
+  void Rotate(direction d) {
+    switch(d) {
+      case Stop:
+        digitalWrite(pinout[0], HIGH);
+        digitalWrite(pinout[1], HIGH);
+        break;
+      case Left:
+        digitalWrite(pinout[0], LOW);
+        digitalWrite(pinout[1], HIGH);
+        break;
+      case Right:
+        digitalWrite(pinout[0], HIGH);
+        digitalWrite(pinout[1], LOW);
+        break;
+    }
+  }
+
+  void setSpeed(int s)
+  {
+    if (s < 0) {
+      s = 0;
+    } else if (s > 255) {
+        s = 255;
+    }
+
+    analogWrite(pinout[2],s);
+    speed = s;
+  }
+  int getSpeed() {
+    return speed;
+  }
+private:
+  int speed;
+  int* pinout;
+};
+
+Engine EngineA = Engine(EngineAIn1, EngineAIn2, EngineASpeedPin);
+Engine EngineB = Engine(EngineBIn1, EngineBIn2, EngineBSpeedPin);
 
 #endif

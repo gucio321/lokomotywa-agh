@@ -37,7 +37,29 @@ void setup() {
 // - When the IsTrainDetected returns true, we immediately proceed to Stopping phase.
 // - when engine fully stopped, the cycle repeats.
 void loop() {
+  auto itd = IsTrainDetected();
+  // 1: Run Resume if appliable
+  if (currentState == Idle && ShouldResumeTrain()) {
+    currentState = Starting;
+  } else {
+    return; // there is no sense to continue here. We MUST get true to ontinue.
+  }
+
   // 1: Detect state changes
+  if (itd && currentState == Running) {
+    currentState = Stopping;
+  }
+
   // 2: Run state-specific commands
-  setRotation(EngineA, Left);
+  int factor = 1;
+  switch (currentState) {
+    case Stopping: // I want it to fallthrough (this is my briliant idea hehe.
+      factor = -1;
+    case Starting:
+      EngineA.setSpeed(EngineA.getSpeed() + factor*SPEED_CHANGE_FACTOR);
+      break;
+    case Idle: // unreachable
+    case Running: // the only thing we're looking for is TrainDetected
+      break;
+  }
 }

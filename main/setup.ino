@@ -2,11 +2,7 @@
 #define SETUP
 #include "Arduino.h"
 
-enum engine {
-  EngineA,
-  EngineB
-};
-
+const int SPEED_CHANGE_FACTOR = 4;
 // GPIO setup
 const int EngineAIn1 = 13; //D13
 const int EngineAIn2 = 12; //D12
@@ -15,11 +11,6 @@ const int EngineASpeedPin = 26; //D26
 const int EngineBIn1 = 14; //D14
 const int EngineBIn2 = 27; //D27 niespodzianka, są w tej samej lini
 const int EngineBSpeedPin = 25; //D25
-
-int EngineAPins[] = {EngineAIn1, EngineAIn2, EngineASpeedPin}; // EngineA pins
-int EngineBPins[] = {EngineBIn1, EngineBIn2, EngineBSpeedPin}; // EngineB pins
-
-const int* enginesPins[] = {EngineAPins, EngineBPins};
 
 enum direction {
   Stop,
