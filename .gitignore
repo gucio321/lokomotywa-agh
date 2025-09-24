@@ -1,1 +1,11 @@
+# JetBrains setup
 .idea/
+cmake-build-*/
+
+# esp-idf
+dependencies.lock
+managed_components/
+sdkconfig
+
+# common user paths
+build/
