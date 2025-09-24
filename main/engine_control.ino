@@ -3,18 +3,9 @@
 
 #include "setup.ino"
 
-int[3] getPinSet(enum engine e) {
-  switch(e) {
-    case EngineA:
-      return [EngineAIn1, EngineAIn2, EngineASpeedPin];
-    case EngineB:
-      return [EngineBIn1, EngineBIn2, EngineBSpeedPin];
-  }
-}
-
 void setRotation(enum engine e, enum direction d) {
-  auto pins = getPinSet(e);
-  switch(direction) {
+  auto pins = enginesPins[e];
+  switch(d) {
     case Stop:
       digitalWrite(pins[0], HIGH);
       digitalWrite(pins[1], HIGH);
@@ -32,7 +23,7 @@ void setRotation(enum engine e, enum direction d) {
 
 void setSpeed(enum engine e,int SpeedValue)
 {
-  auto pins = getPinSet(e);
+  auto pins = enginesPins[e];
   analogWrite(pins[2],SpeedValue);
 }
 

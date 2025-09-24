@@ -4,10 +4,15 @@
 // - pin3 (reffered as speed pin) is PWM pin, range [0,255]
 #include "setup.ino"
 #include "utils.ino"
+#include "engine_control.ino"
+#include "input.ino"
+
+#if defined(ESP_PLATFORM)
 #include "Arduino.h"
-#ifdef ARDUINO_ARCH_ESP32
-#include "esp32-hal-log.h"
 #endif
+
+state currentState;
+
 // Przygotowanie do pracy
 void setup() {
   setup_serial();
@@ -17,8 +22,22 @@ void setup() {
   setup_pins();
 
   DebugPrint("Preparation done. Proceed to loop...n");
+
+  currentState = IsTrainDetected() ? Idle : Running;
 }
 
-// The main loop idea is as follows:
+// The main loop.
+// The flow should be as follows:
+// - assume we start with a train on the sensor (IsTrainDetected == true); state is Idle.
+// - We call ShouldResume Train (until it returns true)
+// - We switch state to Starting
+// - the engine starts up (see below). We do not run IsTrainDetected in this state (the train must leave our sensor :D )
+// - when the startup is complete (some arbitrary value on the pwm) we switch to the Running state. Ideally in this state we will start checking ffor the train on sensor.
+//   Alternatively we could also add some variable checking for train leaving the sensor (TODO)
+// - When the IsTrainDetected returns true, we immediately proceed to Stopping phase.
+// - when engine fully stopped, the cycle repeats.
 void loop() {
+  // 1: Detect state changes
+  // 2: Run state-specific commands
+  setRotation(EngineA, Left);
 }
