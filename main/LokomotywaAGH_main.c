@@ -5,8 +5,12 @@
 #include "setup.ino"
 #include "utils.ino"
 #include "Arduino.h"
+#ifdef ARDUINO_ARCH_ESP32
+#include "esp32-hal-log.h"
+#endif
 // Przygotowanie do pracy
 void setup() {
+  Serial.begin(9600);
   setup_serial();
 
   DebugPrint("Hello from Lokomotywa AGH script!\n");

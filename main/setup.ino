@@ -1,5 +1,6 @@
 #ifndef SETUP
 #define SETUP
+#include "Arduino.h"
 
 enum engine {
   EngineA,
@@ -15,10 +16,10 @@ const int EngineBIn1 = 14; //D14
 const int EngineBIn2 = 27; //D27 niespodzianka, są w tej samej lini
 const int EngineBSpeedPin = 25; //D25
 
-const int** enginesPins = new const int*[2]{
-  new const int[3]{EngineAIn1, EngineAIn2, EngineASpeedPin}, // EngineA pins
-  new const int[3]{EngineBIn1, EngineBIn2, EngineBSpeedPin}, // EngineB pins
-};
+int EngineAPins[] = {EngineAIn1, EngineAIn2, EngineASpeedPin}; // EngineA pins
+int EngineBPins[] = {EngineBIn1, EngineBIn2, EngineBSpeedPin}; // EngineB pins
+
+const int* enginesPins[] = {EngineAPins, EngineBPins};
 
 enum direction {
   Stop,
@@ -39,8 +40,11 @@ enum state engineBState = Idle;
 
 void setup_serial() {
   // set up serial.
+  /*
   Serial.begin(9600);
+  Serial.begin(115200);
   Serial.print("Lokomotywa AGH - Setup\n");
+  */
 }
 
 void setup_pins() {
