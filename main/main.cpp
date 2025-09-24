@@ -52,11 +52,18 @@ void loop() {
 
   // 2: Run state-specific commands
   int factor = 1;
+  state destination = Running;
+  int destinationVal = 255;
   switch (currentState) {
     case Stopping: // I want it to fallthrough (this is my briliant idea hehe.
       factor = -1;
+      destinationVal = 0;
+      destination = Idle;
     case Starting:
       EngineA.setSpeed(EngineA.getSpeed() + factor*SPEED_CHANGE_FACTOR);
+      if (EngineA.getSpeed() == destinationVal) {
+        currentState = destination;
+      }
       break;
     case Idle: // unreachable
     case Running: // the only thing we're looking for is TrainDetected
