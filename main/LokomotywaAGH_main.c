@@ -3,20 +3,19 @@
 // - clockwise= pin1=HIGH, pin2=LOW; counterclockwise= pin1=LOW, pin2=HIGH; stop= pin1=HIGH, pin2=HIGH
 // - pin3 (reffered as speed pin) is PWM pin, range [0,255]
 #include "setup.ino"
-
+#include "utils.ino"
+#include "Arduino.h"
 // Przygotowanie do pracy
 void setup() {
   setup_serial();
+
+  DebugPrint("Hello from Lokomotywa AGH script!\n");
+  DebugPrint("Preparing stuff...\n");
   setup_pins();
+
+  DebugPrint("Preparation done. Proceed to loop...n");
 }
 
-// main loop
+// The main loop idea is as follows:
 void loop() {
-  DebugPrint("Begin frame\n");
-
-  int n=127;
-  _mSetSpeed(speedPinA,n);
-  _mSetSpeed(speedPinB,n);
 }
-
-// Zakres prędkości [0,255]

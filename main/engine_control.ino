@@ -3,17 +3,6 @@
 
 #include "setup.ino"
 
-enum engine {
-  EngineA,
-  EngineB
-};
-
-enum direction {
-  Stop,
-  Left,
-  Right
-}
-
 int[3] getPinSet(enum engine e) {
   switch(e) {
     case EngineA:
