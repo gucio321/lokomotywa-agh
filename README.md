@@ -21,4 +21,6 @@ Run `idf.py build` in projects directory to build the project.
 - Iduino l298 N: https://asset.conrad.com/media10/add/160267/c1/-/en/001525437ML01/upute-za-rukovanje-1525437-iduino-st-1112-pogon-za-motor-1-st.pdf
 - L298N Dual H-Bridge Motor Driver: https://www.handsontec.com/dataspecs/L298N%20Motor%20Driver.pdf
 - Pinout naszego pociągu znajduje się tutaj: [pinout pociągu](./doc/pociag_pinout.png)
+- Laser sensor: ToF VL53L0X: https://www.st.com/resource/en/datasheet/vl53l0x.pdf
+- ESP-IDF (our preffered ESP toolkit) documentation: https://docs.espressif.com/projects/esp-idf/en/release-v3.3/index.html
 
