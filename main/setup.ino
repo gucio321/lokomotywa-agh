@@ -31,7 +31,7 @@ enum state engineBState = Idle;
 
 void setup_serial() {
   // set up serial.
-  Serial.begin(9600);
+  Serial.begin(115200);
   Serial.print("Lokomotywa AGH - Setup\n");
 }
 
