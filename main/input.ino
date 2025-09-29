@@ -2,7 +2,7 @@
 #define INPUTINO
 #include "Arduino.h"
 #include "utils.ino"
-#include "vendor/Adafruit_VL53L0X/src/Adafruit_VL53L0X.h"
+#include <Adafruit_VL53L0X.h>
 #include <Wire.h>
 
 auto DistanceSensor = Adafruit_VL53L0X();
