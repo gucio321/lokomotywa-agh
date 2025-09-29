@@ -21,6 +21,7 @@ void setup() {
   DebugPrint("Hello from Lokomotywa AGH script!\n");
   DebugPrint("Preparing stuff...\n");
   setup_pins();
+  SetupInput();
 
   DebugPrint("Preparation done. Proceed to loop...n");
 

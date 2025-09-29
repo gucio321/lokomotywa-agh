@@ -1,6 +1,21 @@
 #ifndef INPUTINO
 #define INPUTINO
 #include "Arduino.h"
+#include "utils.ino"
+#include "vendor/Adafruit_VL53L0X/src/Adafruit_VL53L0X.h"
+#include <Wire.h>
+
+auto DistanceSensor = Adafruit_VL53L0X();
+
+void SetupInput() {
+    Wire.begin(DistanceSensorSDA, DistanceSensorSCL);
+    if (!DistanceSensor.begin()) {
+    /*
+        DebugPrint(F("Failed to boot VL53L0X"));
+    */
+        while (1);
+    }
+}
 
 // IsTrainDetected returns true whenever a train is detected by our sensor.
 bool IsTrainDetected() {
