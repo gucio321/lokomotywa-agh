@@ -6,6 +6,7 @@
 #include "utils.ino"
 #include "engine_control.ino"
 #include "input.ino"
+#include <iostream>
 
 #if defined(ESP_PLATFORM)
 #include "Arduino.h"
@@ -24,6 +25,7 @@ void setup() {
   DebugPrint("Preparation done. Proceed to loop...n");
 
   currentState = IsTrainDetected() ? Idle : Running;
+  EngineA.Rotate(Left); // set up rotation
 }
 
 // The main loop.
@@ -37,17 +39,26 @@ void setup() {
 // - When the IsTrainDetected returns true, we immediately proceed to Stopping phase.
 // - when engine fully stopped, the cycle repeats.
 void loop() {
-  auto itd = IsTrainDetected();
+  char buff[20];
+  std::sprintf(buff, "state: %d", currentState);
+  DebugPrint(buff);
+
   // 1: Run Resume if appliable
-  if (currentState == Idle && ShouldResumeTrain()) {
-    currentState = Starting;
-  } else {
-    return; // there is no sense to continue here. We MUST get true to ontinue.
+  if (currentState == Idle) {
+          if (ShouldResumeTrain()) {
+                  DebugPrint("Resuming train movement\n");
+                  currentState = Starting;
+          } else {
+                DebugPrint("Not resuming. Exitting main loop");
+
+                return; // there is no sense to continue here. We MUST get true to ontinue.
+          }
   }
 
   // 1: Detect state changes
-  if (itd && currentState == Running) {
-    currentState = Stopping;
+  if (IsTrainDetected() && currentState == Running) {
+          DebugPrint("Train detected! Stopping train\n");
+          currentState = Stopping;
   }
 
   // 2: Run state-specific commands
@@ -55,18 +66,24 @@ void loop() {
   state destination = Running;
   int destinationVal = 255;
   switch (currentState) {
-    case Stopping: // I want it to fallthrough (this is my briliant idea hehe.
-      factor = -1;
-      destinationVal = 0;
-      destination = Idle;
-    case Starting:
-      EngineA.setSpeed(EngineA.getSpeed() + factor*SPEED_CHANGE_FACTOR);
-      if (EngineA.getSpeed() == destinationVal) {
-        currentState = destination;
-      }
-      break;
-    case Idle: // unreachable
-    case Running: // the only thing we're looking for is TrainDetected
-      break;
-  }
+        case Stopping: // I want it to fallthrough (this is my briliant idea hehe.
+                factor = -1;
+                destinationVal = 0;
+                destination = Idle;
+        case Starting:
+                DebugPrint("starting/stopping mode\n");
+                EngineA.setSpeed(EngineA.getSpeed() + factor*SPEED_CHANGE_FACTOR);
+                sprintf(buff, "speed: %d\n", EngineA.getSpeed());
+                DebugPrint(buff);
+                if (EngineA.getSpeed() == destinationVal) {
+                        currentState = destination;
+                }
+
+                break;
+        case Idle: // unreachable
+        case Running: // the only thing we're looking for is TrainDetected
+                DebugPrint("running mode\n");
+                EngineA.setSpeed(255);
+                break;
+        }
 }
