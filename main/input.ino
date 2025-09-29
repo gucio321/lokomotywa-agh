@@ -11,7 +11,7 @@ bool IsTrainDetected() {
 // ShouldResumeTrain returns true when a reobot finishes its job.
 // It is designed to be able to occupy the main thread till true. If false returned this will be recalled till true.
 bool ShouldResumeTrain() {
-    delay(2);
+    delay(5000);
     return true;
 }
 
