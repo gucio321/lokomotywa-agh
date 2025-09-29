@@ -5,7 +5,7 @@ TODO
 # Setup
 
 1. run `git clone https://github.com/espressif/esp-idf.git ~/esp/esp-idf`
-2. in the repo folder run `git checkout v5.1.6` (this is the version used in this project for arduino compatibility reasons)
+2. in the repo folder run `git checkout v5.5.1` (this is the version used in this project for arduino compatibility reasons)
 3. run `git submodule update --init --recursive`
 4. run `./install.sh`
 
