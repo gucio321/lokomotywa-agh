@@ -1,0 +1,31 @@
+name: build
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'master'
+    tags:
+      - 'v*'
+  pull_request:
+
+jobs:
+  Building:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    steps:
+      - name: Checkout out source code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: 'true'
+      - name: Set up esp-idf
+        run: git clone --branch v5.5.1 https://github.com/espressif/esp-idf.git ~/esp/esp-idf
+      - name: Install esp-idf tools
+        run: ./install.sh
+        working-directory: ../../../esp/esp-idf
+      - name: build project
+        run: |
+          . ~/esp/esp-idf/export.sh
+          idf.py build
