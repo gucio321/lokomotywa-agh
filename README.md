@@ -22,5 +22,6 @@ Run `idf.py build` in projects directory to build the project.
 - L298N Dual H-Bridge Motor Driver: https://www.handsontec.com/dataspecs/L298N%20Motor%20Driver.pdf
 - Pinout naszego pociągu znajduje się tutaj: [pinout pociągu](./doc/pociag_pinout.png)
 - Laser sensor: ToF VL53L0X: https://www.st.com/resource/en/datasheet/vl53l0x.pdf
+    * Laser headers: https://github.com/adafruit/Adafruit_VL53L0X
 - ESP-IDF (our preffered ESP toolkit) documentation: https://docs.espressif.com/projects/esp-idf/en/release-v3.3/index.html
 
