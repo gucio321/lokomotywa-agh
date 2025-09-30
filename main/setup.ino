@@ -2,6 +2,7 @@
 #define SETUP
 #include "Arduino.h"
 
+const int TrainDetectionThreshold = 40; // mm
 const int SPEED_CHANGE_FACTOR = 4;
 // GPIO setup
 const int EngineAIn1 = 13; //D13

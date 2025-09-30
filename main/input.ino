@@ -4,23 +4,35 @@
 #include "utils.ino"
 #include <Adafruit_VL53L0X.h>
 #include <Wire.h>
+#include <iostream>
 
 auto DistanceSensor = Adafruit_VL53L0X();
 
 void SetupInput() {
-    Wire.begin(DistanceSensorSDA, DistanceSensorSCL);
+    if (!Wire.begin(DistanceSensorSDA, DistanceSensorSCL)) {
+        DebugPrint("Failed initialize I2C on specified ports!");
+        while (1);
+    }
+
     if (!DistanceSensor.begin()) {
-    /*
-        DebugPrint(F("Failed to boot VL53L0X"));
-    */
+        DebugPrint("Failed to boot VL53L0X");
         while (1);
     }
 }
 
 // IsTrainDetected returns true whenever a train is detected by our sensor.
 bool IsTrainDetected() {
-    // pseudo-random value generator xD
-    return millis() % 2 == 0; // TODO
+    if (!DistanceSensor.isRangeComplete()) {
+        DebugPrint("Sensor not ready!");
+        return false;
+    }
+
+    auto distance = DistanceSensor.readRange();
+
+    char buffer[32];
+    std::sprintf(buffer, "Distance: %d mm", distance);
+
+    return distance <= TrainDetectionThreshold;
 }
 
 // ShouldResumeTrain returns true when a reobot finishes its job.
