@@ -23,5 +23,6 @@ Run `idf.py build` in projects directory to build the project.
 - Pinout naszego pociągu znajduje się tutaj: [pinout pociągu](./doc/pociag_pinout.png)
 - Laser sensor: ToF VL53L0X: https://www.st.com/resource/en/datasheet/vl53l0x.pdf
     * Laser headers: https://github.com/adafruit/Adafruit_VL53L0X
+    * ![laser pinout](./doc/vl53l0x_pinout.png)
 - ESP-IDF (our preffered ESP toolkit) documentation: https://docs.espressif.com/projects/esp-idf/en/release-v3.3/index.html
 
