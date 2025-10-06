@@ -14,23 +14,31 @@ void SetupInput() {
         while (1);
     }
 
+    DebugPrint("I2C initialized.");
+
     if (!DistanceSensor.begin()) {
         DebugPrint("Failed to boot VL53L0X");
         while (1);
     }
+
+    DebugPrint("VL53L0X Ready.");
 }
 
 // IsTrainDetected returns true whenever a train is detected by our sensor.
 bool IsTrainDetected() {
+  /*
     if (!DistanceSensor.isRangeComplete()) {
         DebugPrint("Sensor not ready!");
         return false;
     }
+    */
 
     auto distance = DistanceSensor.readRange();
 
     char buffer[32];
     std::sprintf(buffer, "Distance: %d mm", distance);
+
+    DebugPrint(buffer);
 
     return distance <= TrainDetectionThreshold;
 }
