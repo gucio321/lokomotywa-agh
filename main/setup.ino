@@ -13,8 +13,8 @@ const int EngineBIn1 = 14; //D14
 const int EngineBIn2 = 27; //D27 niespodzianka, są w tej samej lini
 const int EngineBSpeedPin = 25; //D25
                                 //
-const int DistanceSensorSDA = 21; // TODO
-const int DistanceSensorSCL = 22; // TODO
+const int DistanceSensorSDA = 33; // D33
+const int DistanceSensorSCL = 32; // D32
 
 enum direction {
   Stop,
