@@ -37,8 +37,8 @@ public:
   {
     if (s < 0) {
       s = 0;
-    } else if (s > 255) {
-        s = 255;
+    } else if (s > SPEED_CAP) {
+        s = SPEED_CAP;
     }
 
     analogWrite(pinout[2],s);

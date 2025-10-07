@@ -65,7 +65,7 @@ void loop() {
   // 2: Run state-specific commands
   int factor = 1;
   state destination = Running;
-  int destinationVal = 255;
+  int destinationVal = SPEED_CAP;
   switch (currentState) {
         case Stopping: // I want it to fallthrough (this is my briliant idea hehe.
                 factor = -1;
@@ -84,7 +84,7 @@ void loop() {
         case Idle: // unreachable
         case Running: // the only thing we're looking for is TrainDetected
                 DebugPrint("running mode");
-                EngineA.setSpeed(255);
+                EngineA.setSpeed(SPEED_CAP);
                 break;
         }
 }

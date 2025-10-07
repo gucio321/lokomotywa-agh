@@ -4,6 +4,7 @@
 
 const int TrainDetectionThreshold = 40; // mm
 const int SPEED_CHANGE_FACTOR = 4;
+const int SPEED_CAP = 100; // [0-255]
 
 const int NUM_STATIONS = 1;
 const int DISTANCE_SENSOR_ADDRESS[] = {0x30, 0x31, 0x32, 0x33, 0x34, 0x35};
