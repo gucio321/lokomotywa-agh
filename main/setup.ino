@@ -5,8 +5,8 @@
 const int TrainDetectionThreshold = 40; // mm
 const int SPEED_CHANGE_FACTOR = 4;
 
-const int NUM_STATIONS = 6;
-const int DISTANCE_SENSOR_ADDRESS[NUM_STATIONS] = {0x30, 0x31, 0x32, 0x33, 0x34, 0x35};
+const int NUM_STATIONS = 1;
+const int DISTANCE_SENSOR_ADDRESS[] = {0x30, 0x31, 0x32, 0x33, 0x34, 0x35};
 
 // GPIO setup
 const int EngineAIn1 = 13; //D13
@@ -19,7 +19,7 @@ const int EngineBSpeedPin = 25; //D25
                                 //
 const int DistanceSensorSDA = 33; // D33
 const int DistanceSensorSCL = 32; // D32
-const int DistanceSensorShut[NUM_STATIONS] = {1,2,3,4,5,6}; // TODO
+const int DistanceSensorShut[] = {1,2,3,4,5,6}; // TODO
 
 enum direction {
   Stop,

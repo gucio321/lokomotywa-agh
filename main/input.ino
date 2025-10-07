@@ -7,8 +7,13 @@
 #include <iostream>
 
 Adafruit_VL53L0X DistanceSensor[NUM_STATIONS];
+bool previous[NUM_STATIONS];
 
 void SetupInput() {
+    for (int i = 0; i < NUM_STATIONS; i++) {
+        previous[i] = false;
+    }
+
     DebugPrint("Initializin I2C distance sensors...");
     if (!Wire.begin(DistanceSensorSDA, DistanceSensorSCL)) {
         DebugPrint("Failed initialize I2C on specified ports (ESP will be trapped here)!");
@@ -54,6 +59,7 @@ void SetupInput() {
 }
 
 // IsTrainDetected returns true whenever a train is detected by our sensor.
+// This also saves last result and returns true ONLY, when the state changed.
 bool IsTrainDetected() {
     int distance[NUM_STATIONS];
     bool result = false;
@@ -63,7 +69,9 @@ bool IsTrainDetected() {
         char buffer[32];
         std::sprintf(buffer, "Distance%d: %d mm", i, distance[i]);
         DebugPrint(buffer);
-        result |= (distance[i] <= TrainDetectionThreshold);
+        bool detection = (distance[i] <= TrainDetectionThreshold);
+        result |= detection && !previous[i];
+        previous[i] = detection;
     }
 
     return result;
