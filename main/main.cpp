@@ -18,8 +18,8 @@ state currentState;
 void setup() {
   setup_serial();
 
-  DebugPrint("Hello from Lokomotywa AGH script!\n");
-  DebugPrint("Preparing stuff...\n");
+  DebugPrint("Hello from Lokomotywa AGH script!");
+  DebugPrint("Preparing stuff...");
   setup_pins();
   SetupInput();
 
@@ -47,7 +47,7 @@ void loop() {
   // 1: Run Resume if appliable
   if (currentState == Idle) {
           if (ShouldResumeTrain()) {
-                  DebugPrint("Resuming train movement\n");
+                  DebugPrint("Resuming train movement");
                   currentState = Starting;
           } else {
                 DebugPrint("Not resuming. Exitting main loop");
@@ -58,7 +58,7 @@ void loop() {
 
   // 1: Detect state changes
   if (IsTrainDetected() && currentState == Running) {
-          DebugPrint("Train detected! Stopping train\n");
+          DebugPrint("Train detected! Stopping train");
           currentState = Stopping;
   }
 
@@ -72,9 +72,9 @@ void loop() {
                 destinationVal = 0;
                 destination = Idle;
         case Starting:
-                DebugPrint("starting/stopping mode\n");
+                DebugPrint("starting/stopping mode");
                 EngineA.setSpeed(EngineA.getSpeed() + factor*SPEED_CHANGE_FACTOR);
-                sprintf(buff, "speed: %d\n", EngineA.getSpeed());
+                sprintf(buff, "speed: %d", EngineA.getSpeed());
                 DebugPrint(buff);
                 if (EngineA.getSpeed() == destinationVal) {
                         currentState = destination;
@@ -83,7 +83,7 @@ void loop() {
                 break;
         case Idle: // unreachable
         case Running: // the only thing we're looking for is TrainDetected
-                DebugPrint("running mode\n");
+                DebugPrint("running mode");
                 EngineA.setSpeed(255);
                 break;
         }
