@@ -3,10 +3,10 @@
 #include "Arduino.h"
 
 const int TrainDetectionThreshold = 70; // mm
-const int SPEED_CHANGE_FACTOR = 4;
-const int SPEED_CAP = 100; // [0-255]
+const int SPEED_CHANGE_FACTOR = 10;
+const int SPEED_CAP = 150; // [0-255]
 
-const int NUM_STATIONS = 1;
+const int NUM_STATIONS = 4; // Number of Distance sensors to be proceeded.
 const int DISTANCE_SENSOR_ADDRESS[] = {0x30, 0x31, 0x32, 0x33, 0x34, 0x35};
 
 // GPIO setup
@@ -20,7 +20,7 @@ const int EngineBSpeedPin = 25; //D25
                                 //
 const int DistanceSensorSDA = 33; // D33
 const int DistanceSensorSCL = 32; // D32
-const int DistanceSensorShut[] = {15,2,4,16,17,5}; // TODO
+const int DistanceSensorShut[] = {15,2,4,16,5,17}; // TODO
 
 enum direction {
   Stop,
