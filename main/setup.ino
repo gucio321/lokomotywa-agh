@@ -2,7 +2,7 @@
 #define SETUP
 #include "Arduino.h"
 
-const int TrainDetectionThreshold = 40; // mm
+const int TrainDetectionThreshold = 70; // mm
 const int SPEED_CHANGE_FACTOR = 4;
 const int SPEED_CAP = 100; // [0-255]
 
@@ -20,7 +20,7 @@ const int EngineBSpeedPin = 25; //D25
                                 //
 const int DistanceSensorSDA = 33; // D33
 const int DistanceSensorSCL = 32; // D32
-const int DistanceSensorShut[] = {1,2,3,4,5,6}; // TODO
+const int DistanceSensorShut[] = {15,2,4,16,17,5}; // TODO
 
 enum direction {
   Stop,

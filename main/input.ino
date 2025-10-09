@@ -22,16 +22,18 @@ void SetupInput() {
 
     DebugPrint("I2C initialized.");
 
+    /*
     for (int i = 0; i < NUM_STATIONS; i++) {
         DistanceSensor[i] = Adafruit_VL53L0X();
     }
+    */
 
     for (int i = 0; i < NUM_STATIONS; i++) {
         pinMode(DistanceSensorShut[i], OUTPUT);
         digitalWrite(DistanceSensorShut[i], LOW);
     }
 
-    delay(10); // give them some time to go down
+    delay(50); // give them some time to go down
     
     DebugPrint("All the distance Sensors are disabled now.");
 
@@ -41,7 +43,7 @@ void SetupInput() {
         DebugPrint(buffer);
 
         digitalWrite(DistanceSensorShut[i], HIGH);
-        delay(10);
+        delay(500);
         DebugPrint("The Sensor should be up now.");
 
         if (!DistanceSensor[i].begin()) {
