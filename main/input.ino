@@ -71,7 +71,7 @@ bool IsTrainDetected() {
         char buffer[32];
         std::sprintf(buffer, "Distance%d: %d mm", i, distance[i]);
         DebugPrint(buffer);
-        bool detection = (distance[i] <= TrainDetectionThreshold);
+        bool detection = (distance[i] <= TrainDetectionThreshold) && distance[i];
         result |= detection && !previous[i];
         previous[i] = detection;
     }
