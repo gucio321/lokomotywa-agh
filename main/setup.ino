@@ -3,8 +3,8 @@
 #include "Arduino.h"
 
 const int TrainDetectionThreshold = 70; // mm
-const int SPEED_CHANGE_FACTOR = 10;
-const int SPEED_CAP = 150; // [0-255]
+const int SPEED_CHANGE_FACTOR = 40;
+const int SPEED_CAP = 200; // [0-255]
 
 const int NUM_STATIONS = 4; // Number of Distance sensors to be proceeded.
 const int DISTANCE_SENSOR_ADDRESS[] = {0x30, 0x31, 0x32, 0x33, 0x34, 0x35};

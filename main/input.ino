@@ -20,6 +20,8 @@ void SetupInput() {
         while (1);
     }
 
+    Wire.setClock(10000);
+
     DebugPrint("I2C initialized.");
 
     /*
