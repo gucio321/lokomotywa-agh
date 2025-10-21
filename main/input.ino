@@ -20,7 +20,7 @@ void SetupInput() {
         while (1);
     }
 
-    Wire.setClock(10000);
+    Wire.setClock(400);
 
     DebugPrint("I2C initialized.");
 
@@ -67,8 +67,11 @@ void SetupInput() {
 bool IsTrainDetected() {
     int distance[NUM_STATIONS];
     bool result = false;
+    VL53L0X_RangingMeasurementData_t measure;
     for (int i = 0; i < NUM_STATIONS; i++) {
-        distance[i] = DistanceSensor[i].readRange();
+        DistanceSensor[i].rangingTest(&measure, false);
+        //distance[i] = DistanceSensor[i].readRange();
+        distance[i] = measure.RangeMilliMeter;
 
         char buffer[32];
         std::sprintf(buffer, "Distance%d: %d mm", i, distance[i]);
