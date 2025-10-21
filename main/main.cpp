@@ -25,7 +25,7 @@ void setup() {
 
   DebugPrint("Preparation done. Proceed to loop...n");
 
-  currentState = IsTrainDetected() ? Idle : Running;
+  currentState = IsTrainDetected() ? Idle : Starting;
   EngineA.Rotate(Left); // set up rotation
 }
 
