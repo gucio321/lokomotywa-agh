@@ -14,7 +14,7 @@ void SetupInput() {
         previous[i] = false;
     }
 
-    DebugPrint("Initializin I2C distance sensors...");
+    DebugPrint("Initializing I2C distance sensors...");
     if (!Wire.begin(DistanceSensorSDA, DistanceSensorSCL)) {
         DebugPrint("Failed initialize I2C on specified ports (ESP will be trapped here)!");
         while (1);
@@ -48,15 +48,15 @@ void SetupInput() {
         delay(500);
         DebugPrint("The Sensor should be up now.");
 
-        if (!DistanceSensor[i].begin()) {
+        if (!DistanceSensor[i].begin(DISTANCE_SENSOR_ADDRESS[i])) {
             DebugPrint("Failed to boot VL53L0X");
             while (1);
         }
 
-        DebugPrint("Sensor is responsive. Updating its I2C address...");
+        //DebugPrint("Sensor is responsive. Updating its I2C address...");
 
-        DistanceSensor[i].setAddress(DISTANCE_SENSOR_ADDRESS[i]);
-        DebugPrint("Address updated.");
+        //DistanceSensor[i].setAddress(DISTANCE_SENSOR_ADDRESS[i]);
+        //DebugPrint("Address updated.");
     }
 
     DebugPrint("Both VL53L0X Ready now.");
@@ -69,11 +69,14 @@ bool IsTrainDetected() {
     bool result = false;
     VL53L0X_RangingMeasurementData_t measure;
     for (int i = 0; i < NUM_STATIONS; i++) {
-        DistanceSensor[i].rangingTest(&measure, false);
+        char buffer[32];
+        std::sprintf(buffer, "ERROR DETECTED: %d",
+        DistanceSensor[i].rangingTest(&measure, false)
+        );
+        DebugPrint(buffer);
         //distance[i] = DistanceSensor[i].readRange();
         distance[i] = measure.RangeMilliMeter;
 
-        char buffer[32];
         std::sprintf(buffer, "Distance%d: %d mm", i, distance[i]);
         DebugPrint(buffer);
         bool detection = (distance[i] <= TrainDetectionThreshold) && distance[i];
