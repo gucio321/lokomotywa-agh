@@ -20,6 +20,7 @@ const int EngineBSpeedPin = 25; //D25
                                 //
 const int DistanceSensorSDA = 33; // D33
 const int DistanceSensorSCL = 32; // D32
+//const int DistanceSensorShut[] = {2,4,16,5,17};
 const int DistanceSensorShut[] = {15,2,4,16,5,17}; // TODO
 
 enum direction {

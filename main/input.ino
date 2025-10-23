@@ -70,10 +70,15 @@ bool IsTrainDetected() {
     VL53L0X_RangingMeasurementData_t measure;
     for (int i = 0; i < NUM_STATIONS; i++) {
         char buffer[32];
-        std::sprintf(buffer, "ERROR DETECTED: %d",
-        DistanceSensor[i].rangingTest(&measure, false)
-        );
-        DebugPrint(buffer);
+        char state;
+        state = DistanceSensor[i].rangingTest(&measure, true)
+        if(!state){
+          std::sprintf(buffer, "ERROR DETECTED: %d", state);
+          DebugPrint(state);
+          digitalWrite(DistanceSensorShut[i],LOW);
+          delay(50);
+          digitalWrite(DistanceSensorShut[i],HIGH);
+        }
         //distance[i] = DistanceSensor[i].readRange();
         distance[i] = measure.RangeMilliMeter;
 
