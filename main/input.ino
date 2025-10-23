@@ -8,7 +8,31 @@
 
 Adafruit_VL53L0X DistanceSensor[NUM_STATIONS];
 bool previous[NUM_STATIONS];
+void SensorReboot() {
+  for (int i = 0; i < NUM_STATIONS; i++) {
+    pinMode(DistanceSensorShut[i], OUTPUT);
+    digitalWrite(DistanceSensorShut[i], LOW);
+  }
 
+  delay(50); // give them some time to go down
+    
+  DebugPrint("All the distance Sensors are disabled now.");
+
+  for (int i = 0; i < NUM_STATIONS; i++) {
+    char buffer[32];
+    std::sprintf(buffer, "Booting sensor %d...", i);
+    DebugPrint(buffer);
+
+    digitalWrite(DistanceSensorShut[i], HIGH);
+    delay(500);
+    DebugPrint("The Sensor should be up now.");
+
+    if (!DistanceSensor[i].begin(DISTANCE_SENSOR_ADDRESS[i])) {
+      DebugPrint("Failed to boot VL53L0X");
+      while (1);
+    }
+  }
+}
 void SetupInput() {
     for (int i = 0; i < NUM_STATIONS; i++) {
         previous[i] = false;
@@ -30,34 +54,7 @@ void SetupInput() {
     }
     */
 
-    for (int i = 0; i < NUM_STATIONS; i++) {
-        pinMode(DistanceSensorShut[i], OUTPUT);
-        digitalWrite(DistanceSensorShut[i], LOW);
-    }
-
-    delay(50); // give them some time to go down
-    
-    DebugPrint("All the distance Sensors are disabled now.");
-
-    for (int i = 0; i < NUM_STATIONS; i++) {
-        char buffer[32];
-        std::sprintf(buffer, "Booting sensor %d...", i);
-        DebugPrint(buffer);
-
-        digitalWrite(DistanceSensorShut[i], HIGH);
-        delay(500);
-        DebugPrint("The Sensor should be up now.");
-
-        if (!DistanceSensor[i].begin(DISTANCE_SENSOR_ADDRESS[i])) {
-            DebugPrint("Failed to boot VL53L0X");
-            while (1);
-        }
-
-        //DebugPrint("Sensor is responsive. Updating its I2C address...");
-
-        //DistanceSensor[i].setAddress(DISTANCE_SENSOR_ADDRESS[i]);
-        //DebugPrint("Address updated.");
-    }
+    SensorReboot();
 
     DebugPrint("Both VL53L0X Ready now.");
 }
