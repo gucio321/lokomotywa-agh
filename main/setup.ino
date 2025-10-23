@@ -18,8 +18,8 @@ const int EngineBIn1 = 14; //D14
 const int EngineBIn2 = 27; //D27 niespodzianka, są w tej samej lini
 const int EngineBSpeedPin = 25; //D25
                                 //
-const int DistanceSensorSDA = 33; // D33
-const int DistanceSensorSCL = 32; // D32
+const int DistanceSensorSDA = 21; // D21
+const int DistanceSensorSCL = 22; // D22
 //const int DistanceSensorShut[] = {2,4,16,5,17};
 const int DistanceSensorShut[] = {15,2,4,16,5,17}; // TODO
 
@@ -43,6 +43,8 @@ enum state engineBState = Idle;
 void setup_serial() {
   // set up serial.
   Serial.begin(115200);
+  Serial.setDebugOutput(0);
+  esp_log_level_set("*", ESP_LOG_NONE);
   Serial.print("Lokomotywa AGH - Setup\n");
 }
 
@@ -52,6 +54,9 @@ void setup_pins() {
 
   pinMode(EngineBIn1,OUTPUT);
   pinMode(EngineBIn2,OUTPUT);
+
+  pinMode(DistanceSensorSDA, INPUT_PULLUP);
+  pinMode(DistanceSensorSCL, INPUT_PULLUP);
 
   digitalWrite(EngineAIn1,HIGH);
   digitalWrite(EngineAIn2,HIGH);
