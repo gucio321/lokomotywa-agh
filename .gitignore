@@ -9,3 +9,4 @@ sdkconfig
 
 # common user paths
 build/
+.cache
