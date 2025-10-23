@@ -68,15 +68,15 @@ bool IsTrainDetected() {
     for (int i = 0; i < NUM_STATIONS; i++) {
         char buffer[32];
         char state;
-        state = DistanceSensor[i].rangingTest(&measure, true)
-        if(!state){
+        state = DistanceSensor[i].rangingTest(&measure, true);
+        if(state){
           std::sprintf(buffer, "ERROR DETECTED: %d", state);
-          DebugPrint(state);
+          DebugPrint(buffer);
           digitalWrite(DistanceSensorShut[i],LOW);
           delay(50);
           digitalWrite(DistanceSensorShut[i],HIGH);
         }
-        //distance[i] = DistanceSensor[i].readRange();
+        distance[i] = DistanceSensor[i].readRange();
         distance[i] = measure.RangeMilliMeter;
 
         std::sprintf(buffer, "Distance%d: %d mm", i, distance[i]);
